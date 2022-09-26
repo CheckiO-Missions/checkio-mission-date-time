@@ -1,0 +1,46 @@
+<!-- Describe task in general -->
+
+<p>
+    Комп'ютерний формат дати і часу складається тільки з цифр, наприклад: 21.05.2018 16:30.<br>
+    Люди вважають за краще бачити щось подібне: 21 травня 2018 року, 16 годин 30 хвилин.<br>
+    Твоє завдання просте - конвертувати введені дату і час з комп'ютерного формату в "людський" формат.
+</p>
+
+<p style="text-align: center;">
+    <img  title="Date and time" src="{{MEDIA}}example_1.png" alt="example" style="max-height: 190px"/>
+</p>
+
+<!-- Explain input and output values -->
+<p>
+    <strong>Вхідні дані: </strong> Дата та час, як рядок
+</p>
+
+<p>
+    <strong>Вихідні дані: </strong> Та сама дата та час, але в більше розвернутому форматі, як рядок
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+<p>
+<strong>Приклад:</strong>
+</p>
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<!-- Here you can explain how it can be used in development and what is usage of this. -->
+<!-- The section is optional -->
+<p class="for_info_only">
+    <strong>Як це використовується: </strong>
+    Щоб покращити взаєморозуміння між комп’ютером та людиною.
+</p>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p><strong>Передумови: </strong>:<br>
+    0 <  day <= 31<br>
+    0 <  month <= 12<br>
+    1900 <  year <= 3000<br>
+    0 <= hours < 24<br>
+    0 <= minutes < 60
+</p>
