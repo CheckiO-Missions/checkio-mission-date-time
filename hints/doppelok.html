@@ -4,7 +4,7 @@
         I don't know how to start solving this mission
     </div>
     <div class="answer">
-        In general, the idea is simple, you need to display the date and time in a painted version, but everything
+        In general, the idea is simple, you need to display the date and time in a more readable format, but everything
         is not so obvious. I suggest the following: convert the string to the time.struct_time data type, and simply
         use f-strings to output the new variable piece by piece (day, month, year, hour, minute).
     </div>
@@ -76,7 +76,7 @@ def date_time(Time: str) -> str:
         I don't want to give up, help!
     </div>
     <div class="answer">
-        You have a few things left. You have a few things left. We'll add checks for whether time == 01:01, if not -
+        You have a few things left. We'll add checks for whether time == 01:01, if not -
         then we'll add the letter "s" at the end of the words "hour" and "minute", if so - then we'll just add an empty string.
         <pre class="brush: python">
 import time
