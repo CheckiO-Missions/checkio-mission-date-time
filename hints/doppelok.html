@@ -1,0 +1,127 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        I don't know how to start solving this mission
+    </div>
+    <div class="answer">
+        In general, the idea is simple, you need to display the date and time in a more readable format, but everything
+        is not so obvious. I suggest the following: convert the string to the time.struct_time data type, and simply
+        use f-strings to output the new variable piece by piece (day, month, year, hour, minute).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I need help to continue the mission
+    </div>
+    <div class="answer">
+        It will be useful for you to read some information about:
+        <a href='https://docs.python.org/3.10/library/time.html'>time module</a>,
+        <a href='https://docs.python.org/3.10/library/time.html'>time.strptime()</a>
+        <a href='https://docs.python.org/3.10/library/time.html'>time.strftime()</a>.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Need help!
+    </div>
+    <div class="answer">
+        First, we convert our string to the time data type. To do this, you need to import the time module
+        and do the following. The time.strptime() method converts a string according to a pattern to the time.struct_time
+        data type. The template is specified in brackets after our line in the form "%d.%m.%Y %H:%M". This means that
+        we convert our string "05.09.1945 06:30" according to the following pattern "day. month. year hour: minutes",
+        where the dates are separated by a dot, and the time is ":".
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I don't know what to do anymore. I need a little hint.
+    </div>
+    <div class="answer">
+        Next, we will create our representation of the given time in a user-friendly form. We will use f-strings
+        and the time.strftime() method. The first argument in the method is the f-string, the second argument
+        is our variable of type time.struct_time. If you know what to fill this line with, then surprise me! =)
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    return time.strftime(f"", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Nothing works. SOS
+    </div>
+    <div class="answer">
+        Okay, since we have a time.struct_time variable, we can use its attributes (t.tm_mday, t.tm_hour, etc.) to get
+        the date, month, year, and hour and minute values. It will look like this.
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    return time.strftime(f"{t.tm_mday} %B %Y year {t.tm_hour} hour {t.tm_min} minute", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I don't want to give up, help!
+    </div>
+    <div class="answer">
+        You have a few things left. We'll add checks for whether time == 01:01, if not -
+        then we'll add the letter "s" at the end of the words "hour" and "minute", if so - then we'll just add an empty string.
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    h = '' if t.tm_hour == 1 else 's'
+    m = '' if t.tm_min == 1 else 's'
+    return time.strftime(f"{t.tm_mday} %B %Y year {t.tm_hour} hour{h} {t.tm_min} minute{m}", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I want to be the best of the best PROGRAMMERS!!! SHOW ME MORE SOLUTIONS!!1!!!11!
+    </div>
+    <div class="answer">
+        Okay, okay! That's the spirit!=)
+        The same could be solved using the datetime module.
+        <pre class="brush: python">
+from datetime import datetime
+
+def checkio(time):
+    dt = datetime.strptime(time, '%d.%m.%Y %H:%M')
+    hour = 'hour' if dt.hour == 1 else 'hours'
+    minute = 'minute' if dt.minute == 1 else 'minutes'
+    return dt.strftime(f'%-d %B %Y year %-H {hour} %-M {minute}')
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        I want more!
+    </div>
+    <div class="answer">
+        Or you could put the if conditions inside the {} variables of the f-string.
+        <pre class="brush: python">
+from datetime import datetime
+
+def date_time(time: str) -> str:
+    t=datetime.strptime(time,'%d.%m.%Y %H:%M')
+    return t.strftime(f'%-d %B %Y year %-H hour{"s" if t.hour!=1 else ""} %-M minute{"s" if t.minute!=1 else ""}')
+        </pre>
+    </div>
+</div>
+
+
+</body>

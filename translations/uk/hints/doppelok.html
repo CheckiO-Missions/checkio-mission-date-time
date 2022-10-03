@@ -1,0 +1,126 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        Я не знаю, як розпочати вирішення цієї місії
+    </div>
+    <div class="answer">
+        Взагалі ідея проста, потрібно вивести дату та час в розписаному варіанті, але все не так очевидно. Я пропоную
+        наступне: конвертуй рядок у тип даних time.struct_time, та просто за допомогою f-рядків виведи нову змінну по частинами
+        (день, місяць, рік, година, хвилини).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Мені потрібна допомога, щоб продовжити місію
+    </div>
+    <div class="answer">
+        Тобі буде корисно прочитати трохи інформації про:
+        <a href='https://docs.python.org/3.10/library/time.html'>time module</a>,
+        <a href='https://docs.python.org/3.10/library/time.html'>time.strptime()</a>
+        <a href='https://docs.python.org/3.10/library/time.html'>time.strftime()</a>.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Потрібна допомога!
+    </div>
+    <div class="answer">
+        Спочатку конвертуємо наш рядок у тип даних time. Для цього потрібно імпортувати модуль time та виконати наступне.
+        Метод time.strptime() конвертує рядок відповідно до шаблону у тип даних time.struct_time. Шаблон задається в дужках
+        після нашого рядку у вигляді "%d.%m.%Y %H:%M". Це означає що ми наш рядок "09.05.1945 06:30" конвертуємо згідно
+        з наступним шаблоном "день. місяць. рік година:хвилини", де дані дати розділені крапкою, а час ":".
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я вже не знаю що робити. Мені потрібна маленька підказка.
+    </div>
+    <div class="answer">
+        Далі створимо нашу репрезентацію заданого часу у юзер-френдлі формі. Використаємо f-рядки та метод time.strftime().
+        Перший аргумент в методі - це f-рядок, другий аргумент - це наша змінна у типі time.struct_time. Якщо ти знаєш чим
+        заповнити цей рядок, то здивуй мене! =)
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    return time.strftime(f"", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Нічого не працює. SOS
+    </div>
+    <div class="answer">
+        Гаразд, оскільки ми маємо змінну типу time.struct_time, то ми можемо скористатись її атрибутами (t.tm_mday, t.tm_hour і т.н.),
+        щоб отримати значення дати, місяця, року і години з хвилинами. Це буде виглядати наступним чином.
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    return time.strftime(f"{t.tm_mday} %B %Y year {t.tm_hour} hour {t.tm_min} minute", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Не хочу здаватись, допоможи!
+    </div>
+    <div class="answer">
+        Тобі залишилось декілька речей. Додамо перевірки на те, чи години == 01 та хвилини == 01, якщо ні - то ми додамо букву "s" вкінці слів "hour" та "minute", якщо так -
+        то додамо просто порожній рядок.
+        <pre class="brush: python">
+import time
+
+def date_time(Time: str) -> str:
+    t = time.strptime(Time, "%d.%m.%Y %H:%M")
+    h = '' if t.tm_hour == 1 else 's'
+    m = '' if t.tm_min == 1 else 's'
+    return time.strftime(f"{t.tm_mday} %B %Y year {t.tm_hour} hour{h} {t.tm_min} minute{m}", t)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я хочу бути кращим з кращих ПРОГРАМІСТІВ!!! ПОКАЖИ МЕНІ БІЛЬШЕ РІШЕНЬ!!1!!!11!
+    </div>
+    <div class="answer">
+        Добре, добре! Оце настрій!=)
+        Так само можна було б і вирішити використовуючи модуль datetime.
+        <pre class="brush: python">
+from datetime import datetime
+
+def checkio(time):
+    dt = datetime.strptime(time, '%d.%m.%Y %H:%M')
+    hour = 'hour' if dt.hour == 1 else 'hours'
+    minute = 'minute' if dt.minute == 1 else 'minutes'
+    return dt.strftime(f'%-d %B %Y year %-H {hour} %-M {minute}')
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Я хочу більше!
+    </div>
+    <div class="answer">
+        Або можна було б помістити умови if до змінних {} f-рядка.
+        <pre class="brush: python">
+from datetime import datetime
+
+def date_time(time: str) -> str:
+    t=datetime.strptime(time,'%d.%m.%Y %H:%M')
+    return t.strftime(f'%-d %B %Y year %-H hour{"s" if t.hour!=1 else ""} %-M minute{"s" if t.minute!=1 else ""}')
+        </pre>
+    </div>
+</div>
+
+
+</body>
